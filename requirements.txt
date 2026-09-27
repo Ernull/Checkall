@@ -1,2 +1,2 @@
-aiogram>
+aiogram
 requests>=2.31.0
