@@ -1008,7 +1008,7 @@ def process_discount_links(session_dir, target_items, progress_callback=None):
     discounted_json_dir = os.path.join(session_dir, "Discounted_Accounts")
     has_discounted_json = False
 
-    with ThreadPoolExecutor(max_workers=5) as executor:
+    with ThreadPoolExecutor(max_workers=20) as executor:
         futures = {executor.submit(worker_check_discount, item, api): item for item in target_items}
         file_idx = 1
         for future in as_completed(futures):
