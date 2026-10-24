@@ -52,110 +52,6 @@ main_keyboard = ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
-# ---------------- لیست پروکسی‌های پیش‌فرض ----------------
-RAW_DEFAULT_PROXIES = [
-    "http://Eyi7eecyfihd:pe1rm71fd72ka0k@209.50.177.175:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.6.98:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.15.99:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.47.48:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.35.213:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.160.216:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.51.133:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.180.169:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.232.240:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.52.87:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.251.136:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.191.84:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.28.133:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.37.181:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.224.92:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.255.106:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.47.128:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.38.17:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.170.180:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.172.165:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.37.53:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.169.0:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.227.194:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.53.50:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.180.78:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.188.218:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.249.209:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.33.21:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.39.129:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.191.208:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.186.116:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.167.19.176:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.58.95:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.13.165:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.32.145:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.33.227:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.45.178:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.38.33:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.47.195:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@217.181.91.121:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.44.69:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.230.228:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.53.28:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.187.186:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.235.149:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.174.138:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.37.105:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.37.240:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.40.40:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.56.236:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.242.198:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.34.203:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.171.62:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.239.126:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.169.3:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.244.93:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.53.140:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@217.181.91.129:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.44.251:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.173.23:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.46.156:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.245.137:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.8.250:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.162.29:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.243.249:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.232.50:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@193.56.28.28:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.13.253:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.242.2:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.34.129:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.29.199:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.42.143:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.29.224:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.36.239:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.4.143:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.14.79:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.1.18:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.54.229:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.42.147:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.227.153:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.55.53:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.7.244:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.182.193:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.36.52:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.225.85:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.181.217:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.62.25:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.58.236:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@216.26.244.191:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.25.234:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.39.139:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.38.200:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.21.224:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.40.150:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.191.58:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@104.207.58.48:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.180.171:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@65.111.4.154:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@209.50.189.21:3129",
-    "http://eyi7eecyfihd:pe1rm71fd72ka0k@45.3.40.101:3129"
-]
-
 # ==========================================
 # موتور هوشمند پردازش و نرمال‌سازی پروکسی
 # ==========================================
@@ -347,7 +243,8 @@ def load_proxies_from_input(raw_text: str) -> tuple:
     unique_proxies = list(dict.fromkeys(extracted_proxies))
     return unique_proxies, errors
 
-PROXY_LIST = [p for p in (normalize_proxy(x) for x in RAW_DEFAULT_PROXIES) if p]
+# لیست پروکسی‌ها از کاربر دریافت می‌شود (بدون پروکسی هاردکد شده)
+PROXY_LIST = []
 
 if PROXY_URL:
     loaded_from_env, _ = load_proxies_from_input(PROXY_URL)
@@ -998,7 +895,7 @@ def process_delete_all_links(session_dir, target_items):
     return stats, api.request_logs
 
 
-# --- 3. بررسی تخفیف‌ها (پشتیبانی کامل از لینک، TXT و فایل ZIP) ---
+# --- 3. بررسی تخفیف‌ها (گزارش تمام کدهای تخفیف هر اکانت) ---
 def worker_check_discount(target_item, api):
     time.sleep(random.uniform(0.1, 1.0))
     source_name = target_item["source"]
@@ -1006,7 +903,7 @@ def worker_check_discount(target_item, api):
 
     data = target_item["data"] if is_json_file else fetch_data(source_name)
     if not data:
-        return source_name, 0, "error_fetch", "دریافت اطلاعات ناموفق", None, is_json_file
+        return source_name, [], "error_fetch", "دریافت اطلاعات ناموفق", None, is_json_file
 
     acc_token, ref_token = get_tokens_from_data(data)
     if not acc_token and ref_token:
@@ -1017,7 +914,7 @@ def worker_check_discount(target_item, api):
             ref_token = new_ref or ref_token
 
     if not acc_token:
-        return source_name, 0, "error_token", "توکن در اکانت یافت نشد", data, is_json_file
+        return source_name, [], "error_token", "توکن در اکانت یافت نشد", data, is_json_file
 
     _, cerb_id = get_user_ids_from_token(acc_token)
     if not cerb_id and ref_token:
@@ -1029,7 +926,7 @@ def worker_check_discount(target_item, api):
             _, cerb_id = get_user_ids_from_token(acc_token)
 
     if not cerb_id:
-        return source_name, 0, "error_uuid", "Cerberus ID در توکن پیدا نشد", data, is_json_file
+        return source_name, [], "error_uuid", "Cerberus ID در توکن پیدا نشد", data, is_json_file
 
     status, res = api.get_discounts(acc_token, cerb_id)
     if status == 401 and ref_token:
@@ -1044,22 +941,42 @@ def worker_check_discount(target_item, api):
     if status == 200 and isinstance(res, dict):
         discounts = res.get('data') or []
         if not isinstance(discounts, list) or not discounts:
-            return source_name, 0, "success", None, data, is_json_file
-        valid_amounts = [
-            d.get('discountAmount', 0)
-            for d in discounts
-            if isinstance(d, dict) and isinstance(d.get('discountAmount'), (int, float)) and d.get('discountAmount') > 0
-        ]
-        max_d = max(valid_amounts) if valid_amounts else 0
-        return source_name, max_d, "success", None, data, is_json_file
+            return source_name, [], "success", None, data, is_json_file
+
+        valid_discounts = []
+        for d in discounts:
+            if not isinstance(d, dict):
+                continue
+            if d.get('isUsed') is True or d.get('isActive') is False:
+                continue
+            amt = d.get('discountAmount') or 0
+            pct = d.get('discountPercentage') or 0
+            if (isinstance(amt, (int, float)) and amt > 0) or (isinstance(pct, (int, float)) and pct > 0):
+                valid_discounts.append({
+                    'code': d.get('code') or 'بدون کد',
+                    'amount': amt if isinstance(amt, (int, float)) else 0,
+                    'percentage': pct if isinstance(pct, (int, float)) else 0,
+                    'min_Order': d.get('minimumFactoreAmount') or 0,
+                    'expiration': d.get('expirationDate') or '-',
+                    'name': d.get('name') or d.get('discountName') or ''
+                })
+
+        valid_discounts.sort(key=lambda x: (x['amount'], x['percentage']), reverse=True)
+        return source_name, valid_discounts, "success", None, data, is_json_file
     elif status == 401:
-        return source_name, 0, "expired", "توکن منقضی شده است", data, is_json_file
+        return source_name, [], "expired", "توکن منقضی شده است", data, is_json_file
     else:
-        return source_name, 0, "error_api", f"HTTP Status: {status} - {res}", data, is_json_file
+        return source_name, [], "error_api", f"HTTP Status: {status} - {res}", data, is_json_file
 
 def process_discount_links(session_dir, target_items):
     api = OkalaAPI()
-    stats = {"total": len(target_items), "with_discount": 0, "no_discount": 0, "errors": 0}
+    stats = {
+        "total": len(target_items),
+        "with_discount": 0,
+        "total_codes": 0,
+        "no_discount": 0,
+        "errors": 0
+    }
     discounted_items = []
     all_errors = []
     amount_counter = Counter()
@@ -1072,13 +989,21 @@ def process_discount_links(session_dir, target_items):
         file_idx = 1
         for future in as_completed(futures):
             try:
-                source_name, max_d, res, err, updated_data, is_json_file = future.result()
+                source_name, valid_discounts, res, err, updated_data, is_json_file = future.result()
                 if res == "success":
-                    if max_d > 0:
+                    if valid_discounts:
                         stats["with_discount"] += 1
-                        discounted_items.append((source_name, max_d))
-                        amount_k = int(max_d / 10000)
-                        amount_counter[amount_k] += 1
+                        stats["total_codes"] += len(valid_discounts)
+                        discounted_items.append((source_name, valid_discounts))
+
+                        for d_info in valid_discounts:
+                            amt = d_info.get("amount", 0)
+                            pct = d_info.get("percentage", 0)
+                            if amt > 0:
+                                amount_k = int(amt / 10000)
+                                amount_counter[f"{amount_k} هزار تومانی"] += 1
+                            elif pct > 0:
+                                amount_counter[f"{int(pct)} درصدی"] += 1
 
                         if is_json_file and updated_data:
                             os.makedirs(discounted_json_dir, exist_ok=True)
@@ -1106,9 +1031,28 @@ def process_discount_links(session_dir, target_items):
     if discounted_items:
         report_file = os.path.join(session_dir, "Discounted_Links_Report.txt")
         with open(report_file, "w", encoding="utf-8") as f:
-            f.write("گزارش اکانت‌های دارای تخفیف:\n" + "="*40 + "\n\n")
-            for source_name, amount in sorted(discounted_items, key=lambda x: x[1], reverse=True):
-                f.write(f"🎁 تخفیف {int(amount/10000)} هزار تومانی ({int(amount/10):,} تومان):\n{source_name}\n\n")
+            f.write("گزارش اکانت‌های دارای تخفیف (تمامی کدهای فعال هر اکانت):\n" + "="*55 + "\n\n")
+            for source_name, d_list in sorted(
+                discounted_items,
+                key=lambda x: (max(d['amount'] for d in x[1]), len(x[1])),
+                reverse=True
+            ):
+                f.write(f"🔗 اکانت ({len(d_list)} کد تخفیف):\n{source_name}\n")
+                for idx, d_info in enumerate(d_list, 1):
+                    amt = d_info['amount']
+                    pct = d_info['percentage']
+                    code_str = d_info['code']
+                    min_ord = d_info['min_Order']
+                    exp_date = str(d_info['expiration']).replace('T', ' ')
+
+                    if amt > 0:
+                        val_text = f"{int(amt/10000)} هزار تومانی ({int(amt/10):,} تومان)"
+                    else:
+                        val_text = f"{int(pct)}% تخفیف"
+
+                    min_text = f" | حداقل خرید: {int(min_ord/10):,} تومان" if min_ord > 0 else ""
+                    f.write(f"   {idx}. 🎁 {val_text} | کد: {code_str}{min_text} | انقضا: {exp_date}\n")
+                f.write("-" * 50 + "\n\n")
 
     discounted_zip_file = None
     if has_discounted_json:
@@ -1123,7 +1067,7 @@ def process_discount_links(session_dir, target_items):
             f.write("گزارش خطاهای بررسی تخفیف:\n============================\n\n")
             f.write("\n".join(all_errors))
 
-    stats["breakdown"] = dict(sorted(amount_counter.items(), reverse=True))
+    stats["breakdown"] = dict(amount_counter.most_common())
     return stats, report_file, discounted_zip_file, err_file, api.request_logs
 
 
@@ -1247,18 +1191,35 @@ def process_cart_report_links(session_dir, target_items):
 # ==========================================
 # هندلرهای تلگرام
 # ==========================================
+async def ensure_proxies_set(message: Message, state: FSMContext) -> bool:
+    if not PROXY_LIST:
+        await state.set_state(BotStates.waiting_for_proxies)
+        await message.answer(
+            "⚠️ هنوز هیچ پروکسی‌ای در ربات ثبت نشده است!\n\n"
+            "لطفاً ابتدا لیست پروکسی‌های خود را (به صورت متن، لینک یا فایل .txt) ارسال کنید تا ثبت شوند:"
+        )
+        return False
+    return True
+
 @router.message(Command("start"))
 async def cmd_start(message: Message, state: FSMContext):
     await state.clear()
+    proxy_status = (
+        f"🟢 تعداد پروکسی‌های فعال: {len(PROXY_LIST)}"
+        if PROXY_LIST
+        else "🔴 هیچ پروکسی‌ای ثبت نشده است (لطفاً از دکمه تنظیم پروکسی استفاده کنید)"
+    )
     await message.answer(
         f"سیستم چندمنظوره فعال است.\n"
-        f"🌐 تعداد پروکسی‌های فعال فعلی: {len(PROXY_LIST)}\n\n"
+        f"🌐 وضعیت پروکسی: {proxy_status}\n\n"
         "لطفاً از منوی زیر یک گزینه را انتخاب کنید:",
         reply_markup=main_keyboard
     )
 
 @router.message(F.text == "🛒 همگام‌سازی سبد خرید")
 async def btn_sync_cart(message: Message, state: FSMContext):
+    if not await ensure_proxies_set(message, state):
+        return
     await state.set_state(BotStates.waiting_for_sync_links)
     await message.answer(
         "🛒 همگام‌سازی سبد خرید\n\n"
@@ -1267,6 +1228,8 @@ async def btn_sync_cart(message: Message, state: FSMContext):
 
 @router.message(F.text == "🗑 پاک کردن آدرس‌ها")
 async def btn_delete_addresses(message: Message, state: FSMContext):
+    if not await ensure_proxies_set(message, state):
+        return
     await state.set_state(BotStates.waiting_for_delete_links)
     await message.answer(
         "🗑 پاک کردن آدرس‌ها\n\n"
@@ -1275,6 +1238,8 @@ async def btn_delete_addresses(message: Message, state: FSMContext):
 
 @router.message(F.text == "🔎 بررسی تخفیف‌ها")
 async def btn_check_discounts(message: Message, state: FSMContext):
+    if not await ensure_proxies_set(message, state):
+        return
     await state.set_state(BotStates.waiting_for_discount_links)
     await message.answer(
         "🔎 بررسی تخفیف‌ها\n\n"
@@ -1282,11 +1247,13 @@ async def btn_check_discounts(message: Message, state: FSMContext):
         "• فایل .zip (حاوی فایل‌های .json اکانت‌ها یا فایل .txt لینک‌ها)\n"
         "• فایل .txt یا .json\n"
         "• لیست لینک‌ها به صورت پیام متنی\n\n"
-        "گزارش تخفیف‌ها و فایل اکانت‌های تخفیف‌دار به شما تحویل داده می‌شود."
+        "تمامی کدهای تخفیف فعال در هر اکانت استخراج و گزارش می‌شوند."
     )
 
 @router.message(F.text == "📦 گزارش موجودی سبد خرید")
 async def btn_check_carts(message: Message, state: FSMContext):
+    if not await ensure_proxies_set(message, state):
+        return
     await state.set_state(BotStates.waiting_for_cart_report_links)
     await message.answer(
         "📦 گزارش وضعیت سبد خرید\n\n"
@@ -1444,13 +1411,14 @@ async def handle_discount_links(message: Message, bot: Bot, state: FSMContext):
 
     breakdown_text = ""
     if stats.get("breakdown"):
-        lines = [f"▫️ تخفیف {amt} هزار تومانی: {cnt} عدد" for amt, cnt in stats["breakdown"].items()]
-        breakdown_text = "\n📋 تفکیک تخفیف‌ها:\n" + "\n".join(lines) + "\n"
+        lines = [f"▫️ تخفیف {label}: {cnt} عدد" for label, cnt in stats["breakdown"].items()]
+        breakdown_text = "\n📋 تفکیک کل کدهای تخفیف:\n" + "\n".join(lines) + "\n"
 
     report = (
         "📊 گزارش بررسی تخفیف‌ها:\n\n"
         f"کل اکانت‌های بررسی‌شده: {stats['total']}\n"
-        f"🎁 دارای تخفیف: {stats['with_discount']}\n"
+        f"🎁 اکانت‌های دارای تخفیف: {stats['with_discount']}\n"
+        f"🎟 مجموع کل کدهای تخفیف یافت‌شده: {stats.get('total_codes', 0)}\n"
         f"➖ بدون تخفیف/سوخته: {stats['no_discount']}\n"
         f"🔴 خطا: {stats['errors']}\n"
         f"{breakdown_text}"
@@ -1460,7 +1428,7 @@ async def handle_discount_links(message: Message, bot: Bot, state: FSMContext):
     if report_file and os.path.exists(report_file):
         await message.answer_document(
             document=FSInputFile(report_file),
-            caption="🎁 فایل گزارش اکانت‌های دارای تخفیف"
+            caption="🎁 فایل گزارش اکانت‌های دارای تخفیف (شامل تمامی کدهای هر اکانت)"
         )
 
     if discounted_zip_file and os.path.exists(discounted_zip_file):
