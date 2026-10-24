@@ -895,7 +895,7 @@ def process_delete_all_links(session_dir, target_items):
     return stats, api.request_logs
 
 
-# --- 3. بررسی تخفیف‌ها (گزارش تمام کدهای تخفیف هر اکانت) ---
+# --- 3. بررسی تخفیف‌ها (به همراه گزارش زنده و استخراج تمامی کدها) ---
 def worker_check_discount(target_item, api):
     time.sleep(random.uniform(0.1, 1.0))
     source_name = target_item["source"]
@@ -968,14 +968,38 @@ def worker_check_discount(target_item, api):
     else:
         return source_name, [], "error_api", f"HTTP Status: {status} - {res}", data, is_json_file
 
-def process_discount_links(session_dir, target_items):
+def format_live_discount_progress(stats: dict) -> str:
+    total = stats.get("total", 0)
+    processed = stats.get("processed", 0)
+    pct = int((processed / total) * 100) if total > 0 else 0
+    filled = int(pct / 10)
+    bar = "🟩" * filled + "⬜" * (10 - filled)
+
+    breakdown_text = ""
+    if stats.get("breakdown"):
+        lines = [f"▫️ تخفیف {label}: {cnt} عدد" for label, cnt in stats["breakdown"].items()]
+        breakdown_text = "\n📋 تفکیک کدهای یافت‌شده تا این لحظه:\n" + "\n".join(lines) + "\n"
+
+    return (
+        f"🔎 گزارش زنده بررسی تخفیف‌ها...\n\n"
+        f"{bar} {pct}% ({processed} از {total})\n\n"
+        f"🎁 اکانت دارای تخفیف: {stats['with_discount']}\n"
+        f"🎟 کل کدهای تخفیف یافت‌شده: {stats['total_codes']}\n"
+        f"➖ بدون تخفیف / سوخته: {stats['no_discount']}\n"
+        f"🔴 خطا: {stats['errors']}\n"
+        f"{breakdown_text}"
+    )
+
+def process_discount_links(session_dir, target_items, progress_callback=None):
     api = OkalaAPI()
     stats = {
         "total": len(target_items),
+        "processed": 0,
         "with_discount": 0,
         "total_codes": 0,
         "no_discount": 0,
-        "errors": 0
+        "errors": 0,
+        "breakdown": {}
     }
     discounted_items = []
     all_errors = []
@@ -1026,6 +1050,14 @@ def process_discount_links(session_dir, target_items):
             except Exception as e:
                 stats["errors"] += 1
                 all_errors.append(f"🔗 اکانت:\nخطای سیستم: {str(e)}\n{'-'*40}")
+
+            stats["processed"] += 1
+            stats["breakdown"] = dict(amount_counter.most_common())
+            if progress_callback:
+                try:
+                    progress_callback(stats.copy())
+                except Exception:
+                    pass
 
     report_file = None
     if discounted_items:
@@ -1242,12 +1274,12 @@ async def btn_check_discounts(message: Message, state: FSMContext):
         return
     await state.set_state(BotStates.waiting_for_discount_links)
     await message.answer(
-        "🔎 بررسی تخفیف‌ها\n\n"
+        "🔎 بررسی تخفیف‌ها (به همراه گزارش زنده)\n\n"
         "می‌توانید یکی از موارد زیر را ارسال کنید:\n"
         "• فایل .zip (حاوی فایل‌های .json اکانت‌ها یا فایل .txt لینک‌ها)\n"
         "• فایل .txt یا .json\n"
         "• لیست لینک‌ها به صورت پیام متنی\n\n"
-        "تمامی کدهای تخفیف فعال در هر اکانت استخراج و گزارش می‌شوند."
+        "تمامی کدهای تخفیف فعال در هر اکانت استخراج و به صورت زنده گزارش می‌شوند."
     )
 
 @router.message(F.text == "📦 گزارش موجودی سبد خرید")
@@ -1389,7 +1421,7 @@ async def handle_delete_links(message: Message, bot: Bot, state: FSMContext):
     shutil.rmtree(session_dir, ignore_errors=True)
     await state.clear()
 
-# ----------- هندلر وضعیت بررسی تخفیف (لینک / TXT / ZIP) -----------
+# ----------- هندلر وضعیت بررسی تخفیف با گزارش زنده (لینک / TXT / ZIP) -----------
 @router.message(BotStates.waiting_for_discount_links, F.text | F.document)
 async def handle_discount_links(message: Message, bot: Bot, state: FSMContext):
     session_dir = os.path.join(SESSION_BASE_DIR, str(uuid.uuid4()))
@@ -1401,21 +1433,56 @@ async def handle_discount_links(message: Message, bot: Bot, state: FSMContext):
         await message.answer("خطا: هیچ لینک یا فایل اکانت معتبری در ورودی (متن / TXT / ZIP) یافت نشد.")
         return
 
-    msg = await message.answer(f"🔎 در حال بررسی تخفیف‌ها...\nتعداد اکانت‌های شناسایی‌شده: {len(target_items)}")
+    initial_stats = {
+        "total": len(target_items),
+        "processed": 0,
+        "with_discount": 0,
+        "total_codes": 0,
+        "no_discount": 0,
+        "errors": 0,
+        "breakdown": {}
+    }
+    msg = await message.answer(format_live_discount_progress(initial_stats))
+
+    loop = asyncio.get_running_loop()
+    last_edit_time = [0.0]
+    last_text = [""]
+    is_editing = [False]
+
+    async def _safe_edit_progress(new_text: str):
+        if is_editing[0] or new_text == last_text[0]:
+            return
+        is_editing[0] = True
+        try:
+            await msg.edit_text(new_text)
+            last_text[0] = new_text
+        except Exception:
+            pass
+        finally:
+            is_editing[0] = False
+
+    def progress_callback(current_stats: dict):
+        now = time.monotonic()
+        is_finished = current_stats["processed"] >= current_stats["total"]
+        # بروزرسانی پیام هر 2.5 ثانیه یا در پایان کار (برای جلوگیری از Flood Limit تلگرام)
+        if not is_finished and (now - last_edit_time[0] < 2.5):
+            return
+        last_edit_time[0] = now
+        live_text = format_live_discount_progress(current_stats)
+        asyncio.run_coroutine_threadsafe(_safe_edit_progress(live_text), loop)
 
     stats, report_file, discounted_zip_file, err_file, logs = await asyncio.to_thread(
-        process_discount_links, session_dir, target_items
+        process_discount_links, session_dir, target_items, progress_callback
     )
-
-    await safe_delete_message(msg)
 
     breakdown_text = ""
     if stats.get("breakdown"):
         lines = [f"▫️ تخفیف {label}: {cnt} عدد" for label, cnt in stats["breakdown"].items()]
         breakdown_text = "\n📋 تفکیک کل کدهای تخفیف:\n" + "\n".join(lines) + "\n"
 
-    report = (
-        "📊 گزارش بررسی تخفیف‌ها:\n\n"
+    final_report = (
+        "✅ گزارش نهایی بررسی تخفیف‌ها:\n\n"
+        f"🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 100% ({stats['total']} از {stats['total']})\n\n"
         f"کل اکانت‌های بررسی‌شده: {stats['total']}\n"
         f"🎁 اکانت‌های دارای تخفیف: {stats['with_discount']}\n"
         f"🎟 مجموع کل کدهای تخفیف یافت‌شده: {stats.get('total_codes', 0)}\n"
@@ -1423,7 +1490,12 @@ async def handle_discount_links(message: Message, bot: Bot, state: FSMContext):
         f"🔴 خطا: {stats['errors']}\n"
         f"{breakdown_text}"
     )
-    await message.answer(report)
+
+    try:
+        await msg.edit_text(final_report)
+    except Exception:
+        await safe_delete_message(msg)
+        await message.answer(final_report)
 
     if report_file and os.path.exists(report_file):
         await message.answer_document(
